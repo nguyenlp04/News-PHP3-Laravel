@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ArticleController;
-use Illuminate\Support\Facades\DB;
-
 
 class HomeController extends Controller
 {
-    public function index() {
-        $ArticleController = new ArticleController();
-        $articles = $ArticleController->getLatestArticles();
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-        // Trả về view 'index.blade.php' với dữ liệu của các bài viết
-        return view('index', ['articles' => $articles]);
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('home');
     }
 }

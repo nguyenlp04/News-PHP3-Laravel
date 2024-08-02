@@ -8043,4 +8043,8 @@ del {
   margin-bottom: 10px;
 }
 
+img {
+  object-fit: cover;    
+}
+
 /*# sourceMappingURL=main.css.map */

@@ -1,3 +1,5 @@
+@extends('layout/main')
+@section('content')
 <main>
         <!-- About US Start -->
         <div class="about-area">
@@ -24,7 +26,7 @@
                             <!-- Trending Tittle -->
                                     <div class="about-right mb-90">
                                         <div class="about-img">
-                                            <img src="{{ asset('img/post/about_heor.jpg') }}" alt="">
+                                            <img src="{{ asset('storage/img/post/about_heor.jpg') }}" alt="">
                                         </div>
                                         <div class="section-tittle mb-30 pt-30">
                                             <h3>About Us</h3>
@@ -54,7 +56,7 @@
                                 <div class="single-box">
                                     <div class="follow-us d-flex align-items-center">
                                         <div class="follow-social">
-                                            <a href="#"><img src="{{ asset('img/news/icon-fb.png') }}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('storage/img/news/icon-fb.png') }}" alt=""></a>
                                         </div>
                                         <div class="follow-count">  
                                             <span>8,045</span>
@@ -63,7 +65,7 @@
                                     </div> 
                                     <div class="follow-us d-flex align-items-center">
                                         <div class="follow-social">
-                                            <a href="#"><img src="{{ asset('img/news/icon-tw.png') }}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('storage/img/news/icon-tw.png') }}" alt=""></a>
                                         </div>
                                         <div class="follow-count">
                                             <span>8,045</span>
@@ -72,7 +74,7 @@
                                     </div>
                                         <div class="follow-us d-flex align-items-center">
                                         <div class="follow-social">
-                                            <a href="#"><img src="{{ asset('img/news/icon-ins.png') }}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('storage/img/news/icon-ins.png') }}" alt=""></a>
                                         </div>
                                         <div class="follow-count">
                                             <span>8,045</span>
@@ -81,7 +83,7 @@
                                     </div>
                                     <div class="follow-us d-flex align-items-center">
                                         <div class="follow-social">
-                                            <a href="#"><img src="{{ asset('img/news/icon-yo.png') }}" alt=""></a>
+                                            <a href="#"><img src="{{ asset('storage/img/news/icon-yo.png') }}" alt=""></a>
                                         </div>
                                         <div class="follow-count">
                                             <span>8,045</span>
@@ -92,7 +94,7 @@
                             </div>
                             <!-- New Poster -->
                             <div class="news-poster d-none d-lg-block">
-                                <img src="{{ asset('img/news/news_card.jpg') }}" alt="">
+                                <img src="{{ asset('storage/img/news/news_card.jpg') }}" alt="">
                             </div>
                         </div>
                    </div>
@@ -100,3 +102,4 @@
         </div>
         <!-- About US End -->
     </main>
+    @endsection

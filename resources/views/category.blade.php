@@ -1,3 +1,5 @@
+@extends('layout/main')
+@section('content')
 <main>
    <!-- Whats New Start -->
     <section class="whats-news-area pt-50 pb-20">
@@ -38,7 +40,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews1.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews1.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -49,7 +51,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews2.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews2.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -60,7 +62,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews3.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews3.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -71,7 +73,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews4.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews4.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -89,7 +91,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews1.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews1.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -100,7 +102,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews2.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews2.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -111,7 +113,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews3.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews3.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -122,7 +124,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews4.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews4.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -140,7 +142,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews1.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews1.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -151,7 +153,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews2.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews2.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -162,7 +164,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews3.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews3.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -173,7 +175,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews4.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews4.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -191,7 +193,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews1.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews1.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -202,7 +204,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews2.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews2.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -213,7 +215,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews3.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews3.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -224,7 +226,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews4.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews4.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -242,7 +244,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews1.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews1.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -253,7 +255,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews2.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews2.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -264,7 +266,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews3.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews3.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -275,7 +277,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews4.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews4.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -293,7 +295,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews1.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews1.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -304,7 +306,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews2.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews2.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -315,7 +317,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews3.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews3.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -326,7 +328,7 @@
                                         <div class="col-lg-6 col-md-6">
                                             <div class="single-what-news mb-100">
                                                 <div class="what-img">
-                                                    <img src="{{ asset('img/news/whatNews4.jpg') }}" alt="">
+                                                    <img src="{{ asset('storage/img/news/whatNews4.jpg') }}" alt="">
                                                 </div>
                                                 <div class="what-cap">
                                                     <span class="color1">Night party</span>
@@ -352,7 +354,7 @@
                     <div class="single-box">
                         <div class="follow-us d-flex align-items-center">
                             <div class="follow-social">
-                                <a href="#"><img src="{{ asset('img/news/icon-fb.png') }}" alt=""></a>
+                                <a href="#"><img src="{{ asset('storage/img/news/icon-fb.png') }}" alt=""></a>
                             </div>
                             <div class="follow-count">  
                                 <span>8,045</span>
@@ -361,7 +363,7 @@
                         </div> 
                         <div class="follow-us d-flex align-items-center">
                             <div class="follow-social">
-                                <a href="#"><img src="{{ asset('img/news/icon-tw.png') }}" alt=""></a>
+                                <a href="#"><img src="{{ asset('storage/img/news/icon-tw.png') }}" alt=""></a>
                             </div>
                             <div class="follow-count">
                                 <span>8,045</span>
@@ -370,7 +372,7 @@
                         </div>
                             <div class="follow-us d-flex align-items-center">
                             <div class="follow-social">
-                                <a href="#"><img src="{{ asset('img/news/icon-ins.png') }}" alt=""></a>
+                                <a href="#"><img src="{{ asset('storage/img/news/icon-ins.png') }}" alt=""></a>
                             </div>
                             <div class="follow-count">
                                 <span>8,045</span>
@@ -379,7 +381,7 @@
                         </div>
                         <div class="follow-us d-flex align-items-center">
                             <div class="follow-social">
-                                <a href="#"><img src="{{ asset('img/news/icon-yo.png') }}" alt=""></a>
+                                <a href="#"><img src="{{ asset('storage/img/news/icon-yo.png') }}" alt=""></a>
                             </div>
                             <div class="follow-count">
                                 <span>8,045</span>
@@ -390,7 +392,7 @@
                 </div>
                 <!-- New Poster -->
                 <div class="news-poster d-none d-lg-block">
-                    <img src="{{ asset('img/news/news_card.jpg') }}" alt="">
+                    <img src="{{ asset('storage/img/news/news_card.jpg') }}" alt="">
                 </div>
             </div>
             </div>
@@ -421,3 +423,4 @@
     </div>
     <!-- End pagination  -->
     </main>
+    @endsection

@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon.png') }}">
     <!-- Remix icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/59847bd5e5.js" crossorigin="anonymous"></script>
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ asset('css/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
@@ -32,8 +33,6 @@
     @include('layout/header')
     @yield('content')
     @include('layout/footer')
-
-
 
 </body>
 
