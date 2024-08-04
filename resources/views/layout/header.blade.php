@@ -14,9 +14,14 @@
                                 </div>
                                 <div class="header-info-right">
                                     <ul class="header-social">    
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                       <li> <a href="#"><i class="fab fa-pinterest-p"></i></a></li>
+                                    @guest
+                                        <li><a href="{{ url('login') }}">Login</a></li>
+                                        <li><a href="{{ url('register') }}">Sign Up</a></li>
+                                    @endguest
+                                    @auth
+                                    <li><a href="{{ url('admin/dashboard') }}"><span class="text-white">{{ Auth::user()->name }}</span></a></li>
+                                        <li><a href="{{ url('logout') }}">Logout</a></li>
+                                    @endauth
                                     </ul>
                                 </div>
                             </div>
@@ -54,7 +59,7 @@
                                         <ul id="navigation">  
                                               
                                             <li><a href="{{ url('/') }}">Home</a></li>
-                                            <li><a href="{{ url('categori') }}">Category</a></li>
+                                            <li><a href="{{ url('category') }}">Category</a></li>
                                             <li><a href="{{ url('about') }}"">About</a></li>
                                             <!-- <li><a href="{{ url('latest_news') }}"">Latest News</a></li> -->
                                             <li><a href="{{ url('contact') }}"">Contact</a></li>

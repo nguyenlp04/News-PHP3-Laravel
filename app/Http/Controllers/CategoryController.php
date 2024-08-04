@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Category;
+use App\Models\Article;
 
 class CategoryController extends Controller
 {
@@ -102,6 +103,31 @@ class CategoryController extends Controller
         // $query=DB::table('categories')->where('id',$id)->first();
         // $query1=DB::table('categories')->get();
         // return view('admin.category.category',['dataId'=>$query,'data'=>$query1]);
+    }
+
+    public function showPageCategory()
+    {
+        $categories = Category::getCategoryActive();
+        $categoryArticles = [];
+        foreach ($categories as $category) {
+            $categoryArticles[$category->id] = DB::table('articles')
+                ->select('articles.*', 'categories.name as categories_name')
+                ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
+                ->where('articles.status', 1)
+                ->where('articles.category_id', $category->id)
+                ->orderBy('articles.created_at', 'desc')
+                ->limit(8)
+                ->get();
+        }
+            $randomArticles = Article::randomArticles();
+            $allArticles = Article::getAllArticlesCategory();
+
+            return view('category', [
+                'categoryArticles' => $categoryArticles,
+                'randomArticles' => $randomArticles,
+                'categories' => $categories,
+                'allArticles' => $allArticles,
+            ]);
     }
 
     /**

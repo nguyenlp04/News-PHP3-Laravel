@@ -9,21 +9,21 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
-
-Route::get('/', function () {
-    return view('index');
-});
-
-Route::get('/admin/dashboard', function () {
-    return view('/admin/dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::resource('/admin/article',ArticleController::class);
-Route::post('/admin/article/status/{id}', [ArticleController::class, 'updateStatus'])->name('admin.article.status');
+use App\Http\Controllers\CommentController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 
-Route::resource('/admin/category',CategoryController::class);
-Route::post('/admin/category/status/{id}', [CategoryController::class, 'updateStatus'])->name('admin.category.status');
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/category', [CategoryController::class,'showPageCategory']);
+// Route::get('/Categories',[CategoryController::class,'index']);
+
+Route::view('/about', 'about');
+Route::view('/contact', 'contact');
+Route::get('/article/{id}', [ArticleController::class, 'articleDetail'])->name('article.detail');
+
+Route::post('/Comment',[CommentController::class,'addComment'])->name('comment');
 
 
 
@@ -43,3 +43,37 @@ Route::post('send-email',[PHPMailerController::class, 'store'])->name('send.emai
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+Route::middleware(['admin', 'auth', 'verified'])->prefix('admin')->group(function () {
+
+    Route::view('/dashboard', 'admin.dashboard')->name('dashboard');
+    
+    Route::resource('/article', ArticleController::class);
+    Route::post('/article/status/{id}', [ArticleController::class, 'updateStatus'])->name('admin.article.status');
+    
+    Route::resource('/category', CategoryController::class);
+    Route::post('/category/status/{id}', [CategoryController::class, 'updateStatus'])->name('admin.category.status');
+    
+    Route::resource('/comment', CommentController::class);
+});

@@ -135,6 +135,27 @@
                                     </div>
                                 </div>
                                 <!-- Card two -->
+                                @foreach($categories as $category)
+                                    <div class="tab-pane fade" id="nav-{{ $category->id }}" role="tabpanel" aria-labelledby="nav-{{ $category->id }}-tab">
+                                        <div class="whats-news-caption">
+                                            <div class="row">
+                                                @foreach($categoryArticles[$category->id] as $article)
+                                                <div class="col-lg-3 col-md-3">
+                                                    <div class="single-what-news mb-100">
+                                                        <div class="what-img">
+                                                            <img src="{{ asset($article->image_url) }}" alt="">
+                                                        </div>
+                                                        <div class="what-cap">
+                                                            <span class="color1">{{ $article->categories_name }}</span>
+                                                            <h4><a href="{{ url('article/' . $item->id) }}">{{ $item->title }}</a></h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
                                
 
                             </div>

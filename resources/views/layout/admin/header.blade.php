@@ -269,7 +269,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('dashboard') }}"><i class="fas fa-fw fa-wrench"></i> <span>Cài đặt</span></a>
+                <a class="nav-link" href="{{ url('admin/dashboard') }}"><i class="fas fa-fw fa-wrench"></i> <span>Cài đặt</span></a>
             </li>
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -459,7 +459,7 @@
                                  Settings
                              </a>
                              <div class="dropdown-divider"></div>
-                             <a class="dropdown-item" href="../logout" >
+                             <a class="dropdown-item" href="{{ url('logout') }}" >
                                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                  Logout
                              </a>

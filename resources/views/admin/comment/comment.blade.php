@@ -15,12 +15,10 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 2%">ID</th>
-                                        <th style="width: 10%">Title</th>
-                                        <!-- <th>Description</th> -->
-                                        <th>Author</th>
-                                        <th>Category</th>
-                                        <th style="width: 3%">Show</th>
-                                        <th>Created Date</th>
+                                        <th style="width: 10%">Comment</th>
+                                        <th>Article</th>
+                                        <th>User</th>
+                                        <th>Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -28,35 +26,20 @@
                                     @foreach($data as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->title }}</td>
-                                        <!-- <td>{{ $item->description }}</td> -->
-                                        <td>{{ $item->author_name }}</td>
-                                        <td>{{ $item->categories_name }}</td>
-                                        <!-- <td>{{ $item->status == 1 ? 'Hiển thị' : 'Ẩn'}}</td> -->
-                                        <td>
-                                            <form action="{{ route('admin.article.status', $item->id ) }}" method="POST" class="d-inline">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $item->id }}">
-                                                <div class="form-check form-switch">
-                                                    <input class="form-check-input" type="checkbox" role="switch" name="status" value="1" {{ $item->status == 1 ? 'checked' : '' }} onchange="this.form.submit()">
-                                                </div>
-                                            </form>
-                                        </td>
+                                        <td>{{ $item->comment }}</td>
+                                        <td><a class="text-decoration-none" href="{{ url('article/' . $item->article_id) }}">{{ $item->article_title }}</a></td>
+                                        <td>{{ $item->user_name }}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td><a href="{{ url('article/' . $item->id) }}"> <i class="fa-solid fs-5 fa-eye overlay mr-2 " style="color: blue;"></i></a>
-                                            <a href="{{ url('admin/article/' . $item->id) }}">
-                                                <i class="fa-solid fs-5 fa-pen-to-square text-primary mr-2"></i>
-                                            </a>
-                                            <a onclick="confirmDelete(event,{{ $item->id }})"> 
-                                                <form id="delete-form-{{ $item->id }}" action="{{ route('article.destroy', $item->id) }}" method="POST" style="display:inline;" >
+                                        <td>
+                                            <a onclick="confirmDelete(event,{{ $item->id }})">
+                                                <form id="delete-form-{{ $item->id }}" action="{{ route('comment.destroy', $item->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" style="border: none; background: none; color: red; cursor: pointer;">
                                                         <i class="fa-solid fs-5 fa-trash-can text-danger"></i>
-                                                        </button>
+                                                    </button>
                                                 </form>
                                             </a>
-                                        </div>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -92,13 +75,13 @@
                     document.getElementById(`delete-form-${articleId}`).submit();
                 } else {
                     Swal.fire({
-                    title: "Cancelled!",
-                    text: "Action cancelled. Item was not deleted.",
-                    icon: "error"
+                        title: "Cancelled!",
+                        text: "Action cancelled. Item was not deleted.",
+                        icon: "error"
                     });
                 }
             });
         }
-        </script>
+    </script>
 </section>
 @endsection

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Category;
+use App\Models\Comment;
 
 class ArticleController extends Controller
 {
@@ -15,190 +18,79 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $articles = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.id', $id)
-            ->first();
-        return view('admin.article.updateArticle', ['data' => $articles]);
+        $categories = Category::getCategories();
+        $articles = Article::getArticlesById($id);
+        return view('admin.article.updateArticle', ['data' => $articles, 'categories' => $categories]);
     }
-
 
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-
-        $articles = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.status', 1)
-            ->orderBy('articles.created_at', 'desc')
-            ->get();
-
-            $featuredArticle = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.status', 1)
-            ->orderBy('articles.created_at', 'desc')
-            ->first();
-    
-        $subArticles = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.status', 1)
-            ->orderBy('articles.created_at', 'desc')
-            ->limit(3)
-            ->get();
-    
-        $sideArticles = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.status', 1)
-            ->orderBy('articles.created_at', 'desc')
-            ->limit(6)
-            ->get();
-
-
-        // Lấy thông tin thời gian đầu và cuối tuần hiện tại
-        $startOfWeek = Carbon::now()->startOfWeek();
-        $endOfWeek = Carbon::now()->endOfWeek();
-    
-        // Lấy các tin tức nổi bật trong tuần hiện tại
-        $weeklyTopNews = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.status', 1)
-            ->whereBetween('articles.created_at', [$startOfWeek, $endOfWeek])
-            ->orderBy('articles.created_at', 'desc')
-            ->get();
-    
-        // Lấy danh sách thể loại
-        $categories = DB::table('categories')->get();
-    
-        // Khởi tạo mảng để chứa các bài viết của mỗi thể loại
-        $categoryArticles = [];
-    
-        // Lấy tối đa 8 bài viết cho mỗi thể loại
-        foreach ($categories as $category) {
-            $categoryArticles[$category->id] = DB::table('articles')
-                ->select('articles.*', 'categories.name as categories_name')
-                ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-                ->where('articles.status', 1)
-                ->where('articles.category_id', $category->id)
-                ->orderBy('articles.created_at', 'desc')
-                ->limit(8)
-                ->get();
-        }
-    
-        // Lấy 8 bài viết ngẫu nhiên để hiển thị ở tab "All"
-        $randomArticles = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.status', 1)
-            ->inRandomOrder()
-            ->limit(8)
-            ->get();
-    
-        // Lấy các bài viết vừa đọc
-        $recentlyReadArticles = DB::table('recent_reads')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('articles', 'recent_reads.article_id', '=', 'articles.id')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('recent_reads.user_id', Auth::id())
-            ->orderBy('recent_reads.read_at', 'desc')
-            ->limit(8)
-            ->get();
-    
-        // Lấy 4 bài viết gợi ý ngẫu nhiên
-        $recommendedArticles = DB::table('articles')
-            ->select('articles.*', 'categories.name as categories_name')
-            ->leftJoin('categories', 'articles.category_id', '=', 'categories.id')
-            ->where('articles.status', 1)
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
-    
-        return view('index', [
-            'featuredArticle' => $featuredArticle,
-            'subArticles' => $subArticles,
-            'sideArticles' => $sideArticles,
-            'categoryArticles' => $categoryArticles,
-            'randomArticles' => $randomArticles,
-            'recentlyReadArticles' => $recentlyReadArticles,
-            'weeklyTopNews' => $weeklyTopNews,
-            'recommendedArticles' => $recommendedArticles
-        ]);
+    public function index()
+    {
+        $articles = Article::getAllArticles();
+        return view('admin.article.article', ['data' => $articles]);
     }
-    
-    // public function getLatestArticles()
-    // {
-    //     $articles = DB::table('articles')
-    //         ->join('users', 'articles.author_id', '=', 'users.id')
-    //         ->join('categories', 'articles.category_id', '=', 'categories.id')
-    //         ->select('articles.*', 'users.name as author_name', 'categories.name as category')
-    //         ->orderBy('articles.created_at', 'desc')
-    //         ->take(3)
-    //         ->get();
 
-    //     return $articles;
-    // }
-
-
-    
     public function articleDetail($id)
     {
-        $articledetail = DB::table('articles')
-            ->select('articles.*', 'users.name as author_name', 'categories.name as category_name', DB::raw('(SELECT COUNT(*) FROM comments WHERE comments.article_id = articles.id) as comment_count'))
-            ->where('articles.status', 1)
-            ->join('users', 'articles.author_id', '=', 'users.id')
-            ->join('categories', 'articles.category_id', '=', 'categories.id')
-            ->orderBy('articles.created_at', 'desc')
-            ->where('articles.id', '=', $id)->first();
+        try {
+            $articledetail = Article::getArticleDetail($id);
 
-        $nextArticle = DB::table('articles')
-            ->select('*')
-            ->where('articles.status', 1)
-            ->where('articles.created_at', '>', $articledetail->created_at)
-            ->orderBy('articles.created_at', 'asc')
-            ->first();
+                if (!$articledetail || $articledetail->status == 0) {
+                    return ([
+                        'alert', [
+                            'type' => 'error',
+                            'message' => 'The article does not exist or is not public.',
+                        ]
+                    ]);
+                }
+               
+                
+            $nextArticle = Article::nextArticle($articledetail);
+            
+            $previousArticle = Article::previousArticle($articledetail);
 
-        $previousArticle = DB::table('articles')
-            ->select('*')
-            ->where('articles.status', 1)
-            ->where('articles.created_at', '<', $articledetail->created_at)
-            ->orderBy('articles.created_at', 'desc')
-            ->first();
 
-        $categories = DB::table('categories')
-            ->where('categories.status', 1)
-            ->leftJoin('articles', 'categories.id', '=', 'articles.category_id')
-            ->select('categories.id', 'categories.name', DB::raw('COUNT(articles.id) as article_count'))
-            ->groupBy('categories.id', 'categories.name')
-            ->get();
-        $recentArticles = DB::table('articles')
-            ->select('articles.*')
-            ->where('articles.status', 1)
-            ->inRandomOrder()
-            ->limit(4)
-            ->get();
-    
-        foreach ($recentArticles as $article) {
-            $article->time_since_posted = Carbon::parse($article->created_at)->diffForHumans();
+            $getCategoryCount = Category::getCategoryCount();
+
+
+
+            $recentArticles = Article::recentArticles();
+
+            foreach ($recentArticles as $article) {
+                $article->time_since_posted = Carbon::parse($article->created_at)->diffForHumans();
+            }
+
+
+            $sumComment=Comment::sumComment($id);
+            $getCommentById=Comment::getCommentById($id);
+
+            return view('article', [
+                'data' => $articledetail,
+                'nextArticle' => $nextArticle,
+                'previousArticle' => $previousArticle,
+                'categories' => $getCategoryCount,
+                'recentArticles' => $recentArticles,
+                'sumComment' => $sumComment,
+                'getCommentById' => $getCommentById
+            ]);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with('alert', [
+                'type' => 'error',
+                'message' => $th->getMessage()
+            ]);
+
+            // dd($th);
         }
-        return view('article', ['data' => $articledetail,
-                            'nextArticle' => $nextArticle,
-                            'previousArticle' => $previousArticle,
-                            'categories' => $categories,
-                            'recentArticles' => $recentArticles
-                        ]);
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        return view('admin.article.addArticle');
+        $categories = Category::all();
+        return view('admin.article.addArticle', ['categories' => $categories]);
     }
 
     public function updateStatus(Request $request)
@@ -227,7 +119,6 @@ class ArticleController extends Controller
                 'title' => 'required|string|max:255',
                 'description' => 'required|string|max:500',
                 'content' => 'required|string',
-                'author_id' => 'required|integer|exists:users,id',
                 'category_id' => 'required|integer|exists:categories,id',
                 'img_article' => 'required|image|mimes:jpeg,png,jpg,gif',
             ]);
@@ -240,7 +131,7 @@ class ArticleController extends Controller
                 'title' => $validatedData['title'],
                 'description' => $validatedData['description'],
                 'content' => $validatedData['content'],
-                'author_id' => $validatedData['author_id'],
+                'author_id' => Auth::id(),
                 'category_id' => $validatedData['category_id'],
                 'image_url' => 'storage/admin/article/' . $imageName,
                 'views' => $request->input('views', 0),
@@ -276,9 +167,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        $categories=DB::table('categories')->get();
-        $query=Article::showId($id);
-        return view('admin.article.updateArticle',['data'=>$query,'category'=>$categories]);
+        $categories = Category::getCategories();
+        $query = Article::showId($id);
+        return view('admin.article.updateArticle', ['data' => $query, 'category' => $categories]);
     }
 
     /**
@@ -356,16 +247,16 @@ class ArticleController extends Controller
                 if (file_exists(public_path($article->image_url))) {
                     unlink(public_path($article->image_url));
                 }
-                return redirect()->back()->with('alert',[
-                    'type'=>'success',
-                    'message'=>'Article deleted successfully!'
-            ]);
+                return redirect()->back()->with('alert', [
+                    'type' => 'success',
+                    'message' => 'Article deleted successfully!'
+                ]);
             }
         } catch (\Throwable $th) {
-            return redirect()->back()->with('alert',[
-                'type'=>'error',
-                'message'=>' Lỗi : '.$th->getMessage()
-        ]);
+            return redirect()->back()->with('alert', [
+                'type' => 'error',
+                'message' => ' Lỗi : ' . $th->getMessage()
+            ]);
         }
     }
 }

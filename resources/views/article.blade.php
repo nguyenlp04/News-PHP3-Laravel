@@ -1,6 +1,5 @@
 @extends('layout/main')
 @section('content')
-<!-- <pre>{{ $recentArticles->toJson(JSON_PRETTY_PRINT) }}</pre> -->
  <!--================Blog Area =================-->
  <section class="blog_area single-post-area section-padding">
       <div class="container">
@@ -92,136 +91,65 @@
                      </div>
                   </div>
                </div>
+
+               
                <div class="comments-area">
-                  <h4>05 Comments</h4>
+                  <h4>{{ $sumComment }} Comments</h4>
                   <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
+
+                  @foreach($getCommentById as $item)
+                     <div class="single-comment justify-content-between d-flex pb-5">
                         <div class="user justify-content-between d-flex">
                            <div class="thumb">
                               <img src="{{ asset('storage/img/comment/comment_1.png') }}" alt="">
                            </div>
                            <div class="desc">
                               <p class="comment">
-                                 Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                 Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                 {{$item->comment}}
                               </p>
                               <div class="d-flex justify-content-between">
                                  <div class="d-flex align-items-center">
                                     <h5>
-                                       <a href="#">Emilly Blunt</a>
+                                       <a href="#">{{$item->name}}</a>
                                     </h5>
-                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                 </div>
-                                 <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
+                                    <p class="date">{{$item->created_at}}</p>
                                  </div>
                               </div>
                            </div>
                         </div>
                      </div>
+                  @endforeach
+
+                  {{ $getCommentById->links('pagination::bootstrap-4') }}
+
+
                   </div>
-                  <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="thumb">
-                              <img src="{{ asset('storage/img/comment/comment_2.png') }}" alt="">
-                           </div>
-                           <div class="desc">
-                              <p class="comment">
-                                 Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                 Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                              </p>
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <h5>
-                                       <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                 </div>
-                                 <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="comment-list">
-                     <div class="single-comment justify-content-between d-flex">
-                        <div class="user justify-content-between d-flex">
-                           <div class="thumb">
-                              <img src="{{ asset('storage/img/comment/comment_3.png') }}" alt="">
-                           </div>
-                           <div class="desc">
-                              <p class="comment">
-                                 Multiply sea night grass fourth day sea lesser rule open subdue female fill which them
-                                 Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
-                              </p>
-                              <div class="d-flex justify-content-between">
-                                 <div class="d-flex align-items-center">
-                                    <h5>
-                                       <a href="#">Emilly Blunt</a>
-                                    </h5>
-                                    <p class="date">December 4, 2017 at 3:12 pm </p>
-                                 </div>
-                                 <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
+             
                </div>
+               @if(Auth::check())
                <div class="comment-form">
                   <h4>Leave a Reply</h4>
-                  <form class="form-contact comment_form" action="#" id="commentForm">
+                  <form class="form-contact comment_form mb-80" id="commentForm" action="{{ route('comment') }}" method="POST" >
+                  @csrf
                      <div class="row">
                         <div class="col-12">
                            <div class="form-group">
-                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9"
+                              <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="3"
                                  placeholder="Write Comment"></textarea>
-                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                           <div class="form-group">
-                              <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                           </div>
-                        </div>
-                        <div class="col-sm-6">
-                           <div class="form-group">
-                              <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                           </div>
-                        </div>
-                        <div class="col-12">
-                           <div class="form-group">
-                              <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                                 <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+                                 <input type="hidden" name="article_id" value="{{$data->id}}">
                            </div>
                         </div>
                      </div>
-                     <div class="form-group">
+                     <div class="form-group mt-3">
                         <button type="submit" class="button button-contactForm btn_1 boxed-btn">Send Message</button>
                      </div>
                   </form>
                </div>
+               @endif
             </div>
             <div class="col-lg-4">
                <div class="blog_right_sidebar">
-                  <aside class="single_sidebar_widget search_widget">
-                     <form action="#">
-                        <div class="form-group">
-                           <div class="input-group mb-3">
-                              <input type="text" class="form-control" placeholder='Search Keyword'
-                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-                              <div class="input-group-append">
-                                 <button class="btns" type="button"><i class="ti-search"></i></button>
-                              </div>
-                           </div>
-                        </div>
-                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                           type="submit">Search</button>
-                     </form>
-                  </aside>
                   <aside class="single_sidebar_widget post_category_widget">
                      <h4 class="widget_title">Category</h4>
                      <ul class="list cat-list">

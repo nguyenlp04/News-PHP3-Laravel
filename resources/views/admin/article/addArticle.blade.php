@@ -1,5 +1,6 @@
 @extends('layout.admin.main')
 @section('contentAdmin')
+<!-- <pre>{{ $categories->toJson(JSON_PRETTY_PRINT) }}</pre> -->
 <section class="container-fluid py-4">
 <div class="w-full">
         <div class="flex justify-center xl:w-11/13">
@@ -24,11 +25,9 @@
             <div class="mb-3">
                 <label for="category_id" class="form-label text-black font-semibold">Category</label>
                 <select id="category_id" name="category_id" class="form-select border" required>
-                    <option value="1">Technology</option>
-                    <option value="2">Sports</option>
-                    <option value="3">Fashion</option>
-                    <option value="4">Food</option>
-                    <option value="5">Travel</option>
+                    @foreach ($categories as $item )
+                    <option value="{{ $item->id }}">{{ $item ->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -65,7 +64,7 @@
     <div class="d-flex justify-content-end">
         <input type="submit" class="btn btn-primary text-white rounded-lg px-4 py-2 text-sm font-semibold" value="Add Articles">
     </div>
-    <input type="hidden" value="1" name="author_id">
+    <!-- <input type="hidden" value="1" name="author_id"> -->
 </form>
 </div>
                     </div>

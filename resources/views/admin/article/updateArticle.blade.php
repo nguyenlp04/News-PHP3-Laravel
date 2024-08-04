@@ -4,6 +4,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ?>
+
 <section class="container-fluid py-4">
     <div class="w-full">
         <div class="flex justify-center xl:w-11/13">
@@ -27,13 +28,11 @@ ini_set('display_errors', 1);
                                     </div>
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <label for="category_id" class="form-label text-black font-semibold">Category</label>
+                                            <label for="category_id" class="form-label text-black font-semibold">Category{{$data->category_id}}</label>
                                             <select id="category_id" name="category_id" class="form-select border" required>
-                                                <option value="1">Technology</option>
-                                                <option value="2">Sports</option>
-                                                <option value="3">Fashion</option>
-                                                <option value="4">Food</option>
-                                                <option value="5">Travel</option>
+                                            @foreach ($categories as $itemCategory )
+                                            <option value="{{ $itemCategory->id }}"   {{ $itemCategory->id == old('category_id', $data->category_id) ? 'selected' : '' }} >{{ $itemCategory ->name }}</option>
+                                            @endforeach
                                             </select>
                                         </div>
                                     </div>

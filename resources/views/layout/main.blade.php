@@ -26,6 +26,19 @@
     <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const alert = @json(session('alert'));
+
+        Swal.fire({
+            icon: alert.type,
+            title: alert.type === 'error' ? 'Oops!' : 'Success!',
+            text: alert.message,
+            confirmButtonText: 'OK'
+        });
+    });
+</script>
 </head>
 
 <body>
